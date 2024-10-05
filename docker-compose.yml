@@ -10,20 +10,26 @@ services:
     container_name: frontend
     ports:
       - "80:80"
-
+    networks:
+      - idade-network
+   
+          
   backend:
     build: ./backend/.
     depends_on:
       - db        
     container_name: backend
     ports:
-      - "5000:5000"
+      - "5001:5000"
     environment:
       DB_HOST: mysql
       DB_USER: usuário_do_bd
       DB_NAME: nome_do_bd     
     secrets:
       - mysql_password
+    networks:
+      - idade-network
+     
 
   db:
     image: mysql:8.0.39-debian
@@ -34,6 +40,9 @@ services:
       - MYSQL_USER=user
     ports:
       - '3306:3306'
+    networks:
+      - idade-network
+    
 
 
 volumes:
