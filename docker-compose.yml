@@ -23,8 +23,8 @@ services:
       - "5001:5000"
     environment:
       DB_HOST: mysql
-      DB_USER: usuário_do_bd
-      DB_NAME: nome_do_bd     
+      DB_USER: user
+      DB_NAME: db     
     secrets:
       - mysql_password
     networks:
@@ -35,9 +35,12 @@ services:
     image: mysql:8.0.39-debian
     container_name: db    
     restart: always
-    environment:
-      - MYSQL_DATABASE=db
-      - MYSQL_USER=user
+    environment:      
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      
     ports:
       - '3306:3306'
     networks:
@@ -55,7 +58,7 @@ networks:
 
 secrets:
   mysql_root_password:
-    file: ./secrets/mysql_root_password
+    file: ./secrets/mysql_root_password.txt
   mysql_password:
-    file: ./secrets/mysql_password
+    file: ./secrets/mysql_password.txt
 
