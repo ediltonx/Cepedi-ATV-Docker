@@ -36,7 +36,7 @@ def create_users_table():
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(100),
             age INT
-        )
+        );GRANT ALL PRIVILEGES ON users.* TO 'user'@'%'; FLUSH PRIVILEGES
     ''')
     conn.commit()
     conn.close()

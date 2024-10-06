@@ -13,6 +13,9 @@ COPY app.py .
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
 RUN chmod +x /usr/local/bin/wait-for-it.sh
 
+ENV DB_HOST=db
+ENV DB_USER=user
+ENV DB_NAME=db
 
 EXPOSE 5000
 
